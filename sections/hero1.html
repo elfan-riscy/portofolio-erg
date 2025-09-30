@@ -1,0 +1,52 @@
+<!-- Hero -->
+<section id="home" class="h-screen flex items-center bg-cover bg-center relative" style="background-image: url('asset/bg-multimedia.jpg');">
+  <div class="absolute inset-0 bg-black/60"></div>
+  <div class="relative z-10 container max-w-screen-xl mx-auto px-8 grid md:grid-cols-2 gap-10 items-center">
+    
+    <!-- Teks kiri -->
+    <div class="animate-slide-in-left">
+      <h2 class="text-4xl md:text-6xl font-extrabold mb-4">Creative & Professional Multimedia</h2>
+      <p class="text-lg md:text-xl text-gray-300 mb-6">
+        We help bring your ideas into impactful visual creations.
+      </p>
+      <a href="#portfolio" class="px-6 py-3 bg-emerald-500 text-black font-semibold rounded-lg shadow-lg hover:bg-emerald-400 transition">
+        View Portfolio
+      </a>
+    </div>
+
+    <!-- Foto kanan -->
+    <div class="flex flex-col items-center md:items-end animate-float">
+      <img src="images/saya.png" alt="Foto Saya" class="h-80 md:h-[28rem] object-contain drop-shadow-2xl">
+      <p class="mt-4 text-xl font-semibold text-emerald-400 animate-fade-in-up text-center md:text-right">
+        Elfan Rizqi Awaludin, S.Kom <br>
+        <span class="text-gray-300 text-base">Multimedia Specialist</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Animasi tambahan -->
+<style>
+  @keyframes slide-in-left {
+    0% { opacity: 0; transform: translateX(-50px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes fade-in-up {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+    100% { transform: translateY(0px); }
+  }
+  .animate-slide-in-left {
+    animation: slide-in-left 1s ease-out both;
+  }
+  .animate-fade-in-up {
+    animation: fade-in-up 1.2s ease-out both;
+  }
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+</style>
