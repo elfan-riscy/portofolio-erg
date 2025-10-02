@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ERG Multimedia – Katalog Digital</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <style>
+    section { scroll-margin-top: 80px; } /* biar pas klik menu gak ketutup navbar */
+  </style>
+</head>
+<body class="bg-gray-950 text-white font-sans">
+
+  <!-- Navbar -->
+  <header class="fixed w-full bg-gray-900/80 backdrop-blur-lg z-50">
+    <nav class="container max-w-screen-xl mx-auto flex justify-between items-center py-4 px-6">
+      <a href="#home"><img src="images/logo.png" class="h-10"></a>
+      <ul class="hidden md:flex space-x-6 text-sm font-medium">
+        <li><a href="#home" class="hover:text-emerald-400">Home</a></li>
+        <li><a href="#pricing" class="hover:text-emerald-400">Paket</a></li>
+        <li><a href="#demo" class="hover:text-emerald-400">Demo</a></li>
+        <li><a href="#contact" class="hover:text-emerald-400">Kontak</a></li>
+      </ul>
+      <button id="menu-btn" class="md:hidden px-3 py-2 border border-emerald-400 text-emerald-400 rounded-lg">☰</button>
+    </nav>
+    <!-- Menu Mobile -->
+    <div id="menu-mobile" class="hidden md:hidden bg-gray-900 px-6 pb-4">
+      <ul class="flex flex-col space-y-4">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#pricing">Paket</a></li>
+        <li><a href="#demo">Demo</a></li>
+        <li><a href="#contact">Kontak</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Hero -->
+<section id="home" class="relative h-screen w-full overflow-hidden">
+  <!-- Video Background -->
+  <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
+    <source src="video/video.mp4" type="video/mp4">
+    Browser Anda tidak mendukung video.
+  </video>
+
+  <!-- Overlay gelap agar teks terbaca -->
+  <div class="absolute inset-0 bg-black/60"></div>
+
+  <!-- Konten Hero -->
+  <div class="relative z-10 flex flex-col items-center justify-center text-center h-full px-6">
+    <h1 class="text-4xl md:text-6xl font-extrabold mb-4">Katalog Multimedia Profesional</h1>
+    <p class="text-gray-300 text-lg mb-6">Paket desain, fotografi, videografi, website, dan editing untuk brand Anda</p>
+    <a href="#pricing" class="px-6 py-3 bg-emerald-500 text-black font-semibold rounded-lg hover:bg-emerald-400">
+      Lihat Paket Harga
+    </a>
+  </div>
+</section>
+
+
+
+  <!-- Paket Harga -->
+ <section id="pricing" class="py-20 container max-w-screen-xl mx-auto px-6">
+  <h2 class="text-3xl font-bold mb-12 text-emerald-400 text-center">Paket & Apa yang Anda Dapatkan</h2>
+
+  <!-- 🎨 Desain Logo -->
+  <div class="mb-16">
+    <h3 class="text-2xl font-bold mb-6">🎨 Desain Logo</h3>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-gray-800 p-6 rounded-xl shadow">
+        <h4 class="font-semibold text-xl">Basic Logo</h4>
+        <p class="text-gray-400 text-sm mb-4">1 konsep logo sederhana</p>
+        <p class="text-emerald-400 text-2xl font-bold mb-4">Rp 300K</p>
+        <ul class="text-gray-300 space-y-2 text-left">
+          <li>✔ 1 konsep logo</li>
+          <li>✔ Revisi 1x</li>
+          <li>✔ File JPG + PNG</li>
+        </ul>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-xl shadow border-2 border-emerald-500">
+        <h4 class="font-semibold text-xl">Standard Logo</h4>
+        <p class="text-gray-400 text-sm mb-4">Logo profesional dengan varian warna</p>
+        <p class="text-emerald-400 text-2xl font-bold mb-4">Rp 700K</p>
+        <ul class="text-gray-300 space-y-2 text-left">
+          <li>✔ 3 konsep logo</li>
+          <li>✔ Revisi 3x</li>
+          <li>✔ File JPG, PNG, SVG</li>
+          <li>✔ Warna alternatif (dark/light)</li>
+        </ul>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-xl shadow">
+        <h4 class="font-semibold text-xl">Premium Logo</h4>
+        <p class="text-gray-400 text-sm mb-4">Brand identity lengkap</p>
+        <p class="text-emerald-400 text-2xl font-bold mb-4">Rp 1.500K</p>
+        <ul class="text-gray-300 space-y-2 text-left">
+          <li>✔ 5 konsep logo</li>
+          <li>✔ Revisi unlimited</li>
+          <li>✔ File AI, EPS, SVG, PNG, JPG</li>
+          <li>✔ Mini brand guide</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🖌 Desain Grafis -->
+  <div class="mb-16">
+    <h3 class="text-2xl font-bold mb-6">🖌 Desain Grafis</h3>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-gray-800 p-6 rounded-xl shadow">
+        <h4 class="font-semibold">Poster Sosial Media</h4>
+        <p class="text-emerald-400 text-2xl font-bold mb-4">Rp 150K</p>
+        <ul class="text-gray-300 space-y-2 text-left">
+          <li>✔ 1 desain poster</li>
+          <li>✔ Format JPG + PNG</li>
+          <li>✔ Resolusi HD</li>
+        </ul>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-xl shadow">
+        <h4 class="font-semibold">Banner Cetak</h4>
+        <p class="text-emerald-400 text-2xl font-bold mb-4">Rp 250K</p>
+        <ul class="text-gray-300 space-y-2 text-left">
+          <li>✔ Ukuran sesuai request</li>
+          <li>✔ File PDF siap cetak</li>
+          <li>✔ Source file (AI/PSD)</li>
+        </ul>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-xl shadow">
+        <h4 class="font-semibold">Paket Branding</h4>
+        <p class="text-emerald-400 text-2xl font-bold mb-4">Rp 1.200K</p>
+        <ul class="text-gray-300 space-y-2 text-left">
+          <li>✔ Logo + kartu nama</li>
+          <li>✔ Kop surat</li>
+          <li>✔ Panduan tipografi & warna</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 💻 UI/UX Design -->
+  <div class="mb-16">
+    <h3 class="text-2xl font-bold mb-6">💻 UI/UX Design</h3>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-gray-800 p-6 rounded-xl shadow">
+        <h4 class="font-semibold">Landing Page UI</h4>
+        <p class="text-emerald-400 text-2xl font-bold mb-4">Rp 1.000K</p>
+        <ul class="text-gray-300 space-y-2 text-left">
+          <li>✔ Wireframe & mockup</li>
+          <li>✔ Desain responsif</li>
+          <li>✔ File Figma/Sketch</li>
+        </ul>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-xl shadow">
+        <h4 class="font-semibold">Web Katalog UI</h4>
+        <p class="text-emerald-400 text-2xl font-bold mb-4">Rp 2.000K</p>
+        <ul class="text-gray-300 space-y-2 text-left">
+          <li>✔ Layout katalog produk</li>
+          <li>✔ Halaman detail produk</li>
+          <li>✔ Prototipe interaktif</li>
+        </ul>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-xl shadow">
+        <h4 class="font-semibold">Web Sistem UI</h4>
+        <p class="text-emerald-400 text-2xl font-bold mb-4">Rp 3.500K</p>
+        <ul class="text-gray-300 space-y-2 text-left">
+          <li>✔ Dashboard admin</li>
+          <li>✔ Modul CRUD UI</li>
+          <li>✔ UI kit lengkap</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🌐 Website -->
+  <div class="mb-16">
+    <h3 class="text-2xl font-bold mb-6">🌐 Website Development</h3>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-gray-800 p-6 rounded-xl shadow">
+        <h4 class="font-semibold">Landing Page</h4>
+        <p class="text-emerald-400 text-2xl font-bold mb-4">Rp 1.500K</p>
+        <ul class="text-gray-300 space-y-2 text-left">
+          <li>✔ 1 halaman penuh</li>
+          <li>✔ Optimasi SEO dasar</li>
+          <li>✔ Mobile friendly</li>
+        </ul>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-xl shadow">
+        <h4 class="font-semibold">Web Katalog</h4>
+        <p class="text-emerald-400 text-2xl font-bold mb-4">Rp 3.000K</p>
+        <ul class="text-gray-300 space-y-2 text-left">
+          <li>✔ Katalog produk</li>
+          <li>✔ Halaman detail produk</li>
+          <li>✔ Filter pencarian</li>
+        </ul>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-xl shadow">
+        <h4 class="font-semibold">Web Sistem</h4>
+        <p class="text-emerald-400 text-2xl font-bold mb-4">Rp 5.000K</p>
+        <ul class="text-gray-300 space-y-2 text-left">
+          <li>✔ Dashboard admin & user</li>
+          <li>✔ Modul custom sesuai kebutuhan</li>
+          <li>✔ Integrasi database</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 📸 Fotografi -->
+  <div class="mb-16">
+    <h3 class="text-2xl font-bold mb-6">📸 Fotografi</h3>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-gray-800 p-6 rounded-xl shadow">
+        <h4 class="font-semibold">Produk</h4>
+        <p class="text-emerald-400 text-2xl font-bold mb-4">Rp 500K</p>
+        <ul class="text-gray-300 space-y-2 text-left">
+          <li>✔ 10 foto produk</li>
+          <li>✔ Editing dasar</li>
+          <li>✔ File HD</li>
+        </ul>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-xl shadow">
+        <h4 class="font-semibold">Event</h4>
+        <p class="text-emerald-400 text-2xl font-bold mb-4">Rp 1.500K</p>
+        <ul class="text-gray-300 space-y-2 text-left">
+          <li>✔ 50 foto acara</li>
+          <li>✔ Editing ringan</li>
+          <li>✔ File HD</li>
+        </ul>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-xl shadow">
+        <h4 class="font-semibold">Fashion</h4>
+        <p class="text-emerald-400 text-2xl font-bold mb-4">Rp 2.500K</p>
+        <ul class="text-gray-300 space-y-2 text-left">
+          <li>✔ 20–30 foto model</li>
+          <li>✔ Retouch profesional</li>
+          <li>✔ File HD</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🎥 Videografi -->
+  <div class="mb-16">
+    <h3 class="text-2xl font-bold mb-6">🎥 Videografi</h3>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-gray-800 p-6 rounded-xl shadow">
+        <h4 class="font-semibold">Video Produk</h4>
+        <p class="text-emerald-400 text-2xl font-bold mb-4">Rp 1.200K</p>
+        <ul class="text-gray-300 space-y-2 text-left">
+          <li>✔ Durasi 1 menit</li>
+          <li>✔ Musik latar</li>
+          <li>✔ Format MP4 HD</li>
+        </ul>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-xl shadow">
+        <h4 class="font-semibold">Video Promosi</h4>
+        <p class="text-emerald-400 text-2xl font-bold mb-4">Rp 3.000K</p>
+        <ul class="text-gray-300 space-y-2 text-left">
+          <li>✔ Durasi 3 menit</li>
+          <li>✔ Motion graphics ringan</li>
+          <li>✔ Voice over opsional</li>
+        </ul>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-xl shadow">
+        <h4 class="font-semibold">Video Event</h4>
+        <p class="text-emerald-400 text-2xl font-bold mb-4">Rp 5.000K</p>
+        <ul class="text-gray-300 space-y-2 text-left">
+          <li>✔ Dokumentasi penuh</li>
+          <li>✔ Editing highlight</li>
+          <li>✔ Video full acara</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✂ Editing -->
+  <div class="mb-16">
+    <h3 class="text-2xl font-bold mb-6">✂ Editing</h3>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-gray-800 p-6 rounded-xl shadow">
+        <h4 class="font-semibold">Foto Retouch</h4>
+        <p class="text-emerald-400 text-2xl font-bold mb-4">Rp 50K/foto</p>
+        <ul class="text-gray-300 space-y-2 text-left">
+          <li>✔ Warna & cahaya</li>
+          <li>✔ Background bersih</li>
+          <li>✔ File JPG + PNG</li>
+        </ul>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-xl shadow">
+        <h4 class="font-semibold">Video Editing Basic</h4>
+        <p class="text-emerald-400 text-2xl font-bold mb-4">Rp 500K</p>
+        <ul class="text-gray-300 space-y-2 text-left">
+          <li>✔ Pemotongan video</li>
+          <li>✔ Transisi dasar</li>
+          <li>✔ Musik & judul</li>
+        </ul>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-xl shadow">
+        <h4 class="font-semibold">Video Editing Premium</h4>
+        <p class="text-emerald-400 text-2xl font-bold mb-4">Rp 1.500K</p>
+        <ul class="text-gray-300 space-y-2 text-left">
+          <li>✔ Motion graphics</li>
+          <li>✔ Color grading</li>
+          <li>✔ Export 4K</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<section id="demo" class="py-20 bg-gray-900">
+  <div class="container max-w-screen-xl mx-auto px-4 sm:px-6">
+    <h2 class="text-2xl md:text-3xl font-bold mb-10 text-emerald-400 text-center">
+      Demo & Hasil Karya
+    </h2>
+
+    <!-- 🎨 Desain Logo -->
+    <h3 class="text-xl font-semibold text-white mb-6">🎨 Desain Logo</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+      <div class="bg-gray-800 rounded-lg shadow p-3 md:p-6 flex flex-col">
+        <img src="demo/logo1.png" class="rounded-lg mb-3 object-cover h-32 md:h-40 w-full">
+        <h4 class="font-semibold text-base md:text-lg mb-1">Logo Branding 1</h4>
+        <p class="text-gray-400 text-xs md:text-sm mb-3">Logo modern minimalis.</p>
+        <a href="perbaikan.html" class="mt-auto block px-3 py-2 text-sm md:text-base bg-emerald-500 text-black font-semibold rounded hover:bg-emerald-400 text-center">Lihat Demo</a>
+      </div>
+      <div class="bg-gray-800 rounded-lg shadow p-3 md:p-6 flex flex-col">
+        <img src="demo/logo2.png" class="rounded-lg mb-3 object-cover h-32 md:h-40 w-full">
+        <h4 class="font-semibold text-base md:text-lg mb-1">Logo Branding 2</h4>
+        <p class="text-gray-400 text-xs md:text-sm mb-3">Logo untuk startup digital.</p>
+        <a href="perbaikan.html"mt-auto block px-3 py-2 text-sm md:text-base bg-emerald-500 text-black font-semibold rounded hover:bg-emerald-400 text-center">Lihat Demo</a>
+      </div>
+    </div>
+
+    <!-- 🖌 Desain Grafis -->
+    <h3 class="text-xl font-semibold text-white mb-6">🖌 Desain Grafis</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+      <div class="bg-gray-800 rounded-lg shadow p-3 md:p-6 flex flex-col">
+        <img src="demo/grafis1.jpg" class="rounded-lg mb-3 object-cover h-32 md:h-40 w-full">
+        <h4 class="font-semibold text-base md:text-lg mb-1">Poster Event</h4>
+        <p class="text-gray-400 text-xs md:text-sm mb-3">Desain poster promosi event.</p>
+        <a href="perbaikan.html" class="mt-auto block px-3 py-2 bg-emerald-500 text-black font-semibold rounded hover:bg-emerald-400 text-center">Lihat Demo</a>
+      </div>
+      <div class="bg-gray-800 rounded-lg shadow p-3 md:p-6 flex flex-col">
+        <img src="demo/grafis2.jpg" class="rounded-lg mb-3 object-cover h-32 md:h-40 w-full">
+        <h4 class="font-semibold text-base md:text-lg mb-1">Banner Cetak</h4>
+        <p class="text-gray-400 text-xs md:text-sm mb-3">Banner besar untuk brand.</p>
+        <a href="perbaikan.html" class="mt-auto block px-3 py-2 bg-emerald-500 text-black font-semibold rounded hover:bg-emerald-400 text-center">Lihat Demo</a>
+      </div>
+    </div>
+
+    <!-- 💻 UI/UX -->
+    <h3 class="text-xl font-semibold text-white mb-6">💻 UI/UX Designer</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+      <div class="bg-gray-800 rounded-lg shadow p-3 md:p-6 flex flex-col">
+        <img src="demo/uiux1.jpg" class="rounded-lg mb-3 object-cover h-32 md:h-40 w-full">
+        <h4 class="font-semibold text-base md:text-lg mb-1">Landing Page UI</h4>
+        <p class="text-gray-400 text-xs md:text-sm mb-3">UI mockup untuk UMKM.</p>
+        <a href="perbaikan.html" class="mt-auto block px-3 py-2 bg-emerald-500 text-black font-semibold rounded hover:bg-emerald-400 text-center">Lihat Demo</a>
+      </div>
+    </div>
+
+    <!-- 🌐 Website -->
+    <h3 class="text-xl font-semibold text-white mb-6">🌐 Website Development</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+      <div class="bg-gray-800 rounded-lg shadow p-3 md:p-6 flex flex-col">
+        <img src="demo/web1.png" class="rounded-lg mb-3 object-cover h-32 md:h-40 w-full">
+        <h4 class="font-semibold text-base md:text-lg mb-1">Landing Page</h4>
+        <p class="text-gray-400 text-xs md:text-sm mb-3">Web company profile.</p>
+        <a href="https://exploresigedang.com/" class="mt-auto block px-3 py-2 bg-emerald-500 text-black font-semibold rounded hover:bg-emerald-400 text-center">Lihat Demo</a>
+      </div>
+      <div class="bg-gray-800 rounded-lg shadow p-3 md:p-6 flex flex-col">
+        <img src="demo/web2.jpg" class="rounded-lg mb-3 object-cover h-32 md:h-40 w-full">
+        <h4 class="font-semibold text-base md:text-lg mb-1">Web Katalog</h4>
+        <p class="text-gray-400 text-xs md:text-sm mb-3">Katalog produk online.</p>
+        <a href="perbaikan.html" class="mt-auto block px-3 py-2 bg-emerald-500 text-black font-semibold rounded hover:bg-emerald-400 text-center">Lihat Demo</a>
+      </div>
+    </div>
+
+    <!-- 📸 Fotografi -->
+    <h3 class="text-xl font-semibold text-white mb-6">📸 Fotografi</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+      <div class="bg-gray-800 rounded-lg shadow p-3 md:p-6 flex flex-col">
+        <img src="demo/foto1.jpg" class="rounded-lg mb-3 object-cover h-32 md:h-40 w-full">
+        <h4 class="font-semibold text-base md:text-lg mb-1">Foto Produk</h4>
+        <p class="text-gray-400 text-xs md:text-sm mb-3">Foto produk fashion studio.</p>
+        <a href="perbaikan.html" class="mt-auto block px-3 py-2 bg-emerald-500 text-black font-semibold rounded hover:bg-emerald-400 text-center">Lihat Demo</a>
+      </div>
+    </div>
+
+    <!-- 🎥 Videografi -->
+    <h3 class="text-xl font-semibold text-white mb-6">🎥 Videografi</h3>
+<div class="bg-gray-800 rounded-lg shadow p-3 md:p-6 flex flex-col">
+  <div class="rounded-lg overflow-hidden mb-3">
+    <iframe class="w-full h-40 md:h-56"
+      src="https://youtu.be/ntIPa_pyf-U?si=ARS-k0hrBBwrCf1-"
+      title="Demo Video Promosi"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+  </div>
+  <a href="https://youtu.be/ntIPa_pyf-U?si=ARS-k0hrBBwrCf1-" target="_blank"
+     class="mt-auto block px-3 py-2 bg-emerald-500 text-black font-semibold rounded hover:bg-emerald-400 text-center">
+    Tonton di YouTube
+  </a>
+</div>
+
+
+
+    <!-- ✂ Editing -->
+    <h3 class="text-xl font-semibold text-white mb-6">✂ Editing</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="bg-gray-800 rounded-lg shadow p-3 md:p-6 flex flex-col">
+        <img src="demo/edit1.jpg" class="rounded-lg mb-3 object-cover h-32 md:h-40 w-full">
+        <h4 class="font-semibold text-base md:text-lg mb-1">Editing Video</h4>
+        <p class="text-gray-400 text-xs md:text-sm mb-3">Editing cinematic dengan color grading.</p>
+        <a href="perbaikan.html" class="mt-auto block px-3 py-2 bg-emerald-500 text-black font-semibold rounded hover:bg-emerald-400 text-center">Lihat Demo</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+  <!-- Kontak -->
+  <section id="contact" class="py-20 container max-w-screen-md mx-auto px-6">
+    <h2 class="text-3xl font-bold mb-8 text-emerald-400 text-center">Kontak Kami</h2>
+    <form class="grid gap-4 bg-gray-800 p-8 rounded-xl shadow">
+      <input type="text" placeholder="Nama" class="p-3 rounded bg-gray-700 border border-gray-600">
+      <input type="email" placeholder="Email" class="p-3 rounded bg-gray-700 border border-gray-600">
+      <textarea placeholder="Pesan" rows="4" class="p-3 rounded bg-gray-700 border border-gray-600"></textarea>
+      <button class="px-6 py-3 bg-emerald-500 text-black font-semibold rounded hover:bg-emerald-400">Kirim Pesan</button>
+    </form>
+    <div class="mt-6 text-center text-gray-400">
+      <p>Email: <a href="mailto:riscygrafis@gmail.com" class="text-emerald-400">riscygrafis@gmail.com</a></p>
+      <p>WhatsApp: <a href="https://wa.me/6281227729240" target="_blank" class="text-emerald-400">+62 812-2772-9240</a></p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-950 py-6 text-center text-gray-500 text-sm border-t border-gray-800">
+    © 2025 ERG Multimedia. All Rights Reserved.
+  </footer>
+
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/6281227279240" target="_blank" 
+     class="fixed bottom-6 right-6 bg-emerald-500 text-white rounded-full shadow-lg p-4 hover:p-5 transition-all duration-300 z-50">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M20.52 3.48A11.93 11.93 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 5.99L0 24l6.21-1.62A11.93 11.93 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.19-1.24-6.19-3.48-8.52zM12 22a9.94 9.94 0 0 1-5.1-1.4l-.36-.21-3.68.96.98-3.58-.23-.37A9.96 9.96 0 0 1 2 12c0-5.52 4.48-10 10-10 2.67 0 5.18 1.04 7.07 2.93A9.96 9.96 0 0 1 22 12c0 5.52-4.48 10-10 10zm5.24-7.76c-.29-.15-1.72-.85-1.98-.94-.27-.1-.46-.15-.65.15s-.75.94-.92 1.13c-.17.19-.34.21-.63.06-.29-.15-1.23-.45-2.34-1.43-.86-.76-1.44-1.7-1.61-1.99-.17-.29-.02-.45.13-.6.13-.13.29-.34.44-.51.15-.17.19-.29.29-.48.1-.19.05-.36-.02-.51-.07-.15-.65-1.57-.89-2.15-.24-.58-.48-.5-.65-.51h-.56c-.19 0-.51.07-.77.36s-1.01.99-1.01 2.41 1.04 2.79 1.19 2.98c.15.19 2.05 3.13 4.96 4.39.69.3 1.23.48 1.65.62.69.22 1.31.19 1.8.11.55-.08 1.72-.7 1.97-1.38.24-.67.24-1.25.17-1.38-.07-.13-.26-.21-.55-.36z"/>
+    </svg>
+  </a>
+
+  <!-- Script menu mobile -->
+  <script>
+    const menuBtn = document.getElementById("menu-btn");
+    const menuMobile = document.getElementById("menu-mobile");
+    menuBtn.addEventListener("click", () => menuMobile.classList.toggle("hidden"));
+    document.addEventListener("click", e => {
+      if (e.target.closest("#menu-mobile a")) menuMobile.classList.add("hidden");
+    });
+  </script>
+
+</body>
+</html>

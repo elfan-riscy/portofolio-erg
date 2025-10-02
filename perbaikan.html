@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Situs Sedang Dalam Perbaikan</title>
+  <meta name="description" content="Website kami sedang dalam perbaikan untuk pengalaman yang lebih baik." />
+  <meta name="theme-color" content="#0ea5e9" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg-dark: #0b1220;
+      --bg-light: #0f172a;
+      --card: #111827;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --brand: #0ea5e9; /* sky-500 */
+      --brand-2:#22d3ee; /* cyan-400 */
+      --ok: #34d399;
+      --warn: #f59e0b;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 70% -10%, rgba(34,211,238,.08), transparent 60%),
+        radial-gradient(900px 500px at -10% 20%, rgba(14,165,233,.10), transparent 55%),
+        linear-gradient(180deg, var(--bg-dark), var(--bg-light));
+      display:grid;
+      place-items:center;
+      padding:24px;
+    }
+    .card{
+      width:100%;
+      max-width:760px;
+      background:rgba(17,24,39,0.7);
+      backdrop-filter: blur(10px);
+      border:1px solid rgba(148,163,184,.15);
+      border-radius:24px;
+      padding:28px;
+      box-shadow: 0 10px 35px rgba(2,6,23,.45);
+      position:relative;
+      overflow:hidden;
+    }
+    /* subtle animated gradient border */
+    .glow{
+      position:absolute; inset:-2px;
+      border-radius:26px;
+      padding:2px;
+      background: conic-gradient(from 180deg, var(--brand), var(--brand-2), var(--brand));
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+      animation: spin 8s linear infinite;
+      opacity:.25;
+    }
+    @keyframes spin{to{transform:rotate(1turn)}}
+
+    header{
+      display:flex; align-items:center; gap:14px; margin-bottom:16px;
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      font-weight:600; color:#032e3a; background:linear-gradient(90deg, #67e8f9, #38bdf8);
+      padding:8px 12px; border-radius:999px; font-size:12px; letter-spacing:.3px;
+      box-shadow:0 6px 16px rgba(14,165,233,.35);
+    }
+    .title{
+      font-size: clamp(28px, 4.2vw, 40px);
+      font-weight:800;
+      line-height:1.1;
+      margin:6px 0 8px;
+      letter-spacing:.2px;
+      background: linear-gradient(90deg, #e6f9ff, #a5f3fc);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    .subtitle{
+      color:var(--muted);
+      font-size: clamp(14px, 2.2vw, 16px);
+      margin:0 0 18px;
+    }
+    .progress-wrap{
+      background: rgba(148,163,184,.15);
+      border:1px solid rgba(148,163,184,.2);
+      border-radius:999px;
+      height:10px; overflow:hidden;
+    }
+    .progress{
+      width: 65%;
+      height:100%;
+      background: linear-gradient(90deg, var(--brand), var(--brand-2));
+      border-radius:999px;
+      position:relative;
+      animation: breathe 2.6s ease-in-out infinite;
+    }
+    @keyframes breathe{
+      0%,100%{filter:brightness(1)}
+      50%{filter:brightness(1.2)}
+    }
+    .hint{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin:12px 2px 0; color:var(--muted); font-size:13px;}
+    .stack{
+      display:grid; grid-template-columns: 1fr; gap:18px; margin-top:22px;
+    }
+    .panel{
+      display:flex; gap:16px; align-items:flex-start;
+      background:rgba(2,6,23,.35);
+      border:1px dashed rgba(148,163,184,.25);
+      border-radius:16px; padding:16px;
+    }
+    .icon{
+      width:42px; height:42px; border-radius:12px;
+      display:grid; place-items:center;
+      background:rgba(14,165,233,.12);
+      border:1px solid rgba(14,165,233,.25);
+      flex:0 0 auto;
+    }
+    .panel h3{margin:0 0 6px; font-size:16px}
+    .panel p{margin:0; color:var(--muted); font-size:14px; line-height:1.6}
+    .actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:8px}
+    .btn{
+      appearance:none; border:0; cursor:pointer;
+      padding:10px 14px; border-radius:12px; font-weight:600; font-size:14px;
+      background:linear-gradient(90deg, var(--brand), var(--brand-2));
+      color:#042b36; box-shadow:0 6px 18px rgba(14,165,233,.3);
+      text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    }
+    .btn.secondary{
+      background: transparent; color:var(--text);
+      border:1px solid rgba(148,163,184,.25);
+      box-shadow:none;
+    }
+    footer{margin-top:20px; color:var(--muted); font-size:12px; text-align:center}
+    /* Responsive */
+    @media (min-width: 720px){
+      .stack{ grid-template-columns: 1.2fr .8fr; }
+    }
+
+    /* Accessible focus */
+    a:focus, button:focus{ outline: 3px solid #22d3ee55; outline-offset: 2px; border-radius:10px}
+  </style>
+</head>
+<body>
+  <main class="card" role="status" aria-live="polite">
+    <span class="glow" aria-hidden="true"></span>
+
+    <header>
+      <span class="badge" aria-label="Status perbaikan">
+        <!-- wrench icon -->
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M21 3l-6 6m0 0 6 6M15 9a6 6 0 11-6 6 6 6 0 016-6z" stroke="#0f172a" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Sedang Dalam Perbaikan
+      </span>
+    </header>
+
+    <h1 class="title">Kami sedang menyeduh pengalaman yang lebih baik ☕</h1>
+    <p class="subtitle">
+      Terima kasih sudah mampir! Tim kami sedang melakukan peningkatan performa, tampilan,
+      dan keamanan. Halaman akan kembali online segera setelah semuanya stabil.
+    </p>
+
+    <div class="progress-wrap" aria-label="Progres perbaikan">
+      <div class="progress" style="--w:65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+    <div class="hint">
+      <span>Perbaikan berjalan…</span>
+      <span><strong>65%</strong> selesai</span>
+    </div>
+
+    <section class="stack" aria-label="Informasi & Kontak">
+      <div class="panel">
+        <div class="icon" aria-hidden="true">
+          <!-- rocket -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M5 19c3 0 6-3 7-5 1-2 1-5 1-5s3-1 5-1c0 2-1 5-1 5s-3 0-5 1c-2 1-5 4-5 7 0 0-2-2-2-2s0-2 0-2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <h3>Yang baru nanti</h3>
+          <p>Desain lebih segar, waktu muat lebih cepat, dan fitur yang memudahkan kamu menjelajah konten.</p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="icon" aria-hidden="true">
+          <!-- bell -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M15 17h5l-1.4-1.4A2 2 0 0118 14v-2a6 6 0 10-12 0v2c0 .53-.21 1.04-.59 1.41L4 17h5m6 0a3 3 0 11-6 0m6 0H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <h3>Dapatkan kabar</h3>
+          <p>Butuh info cepat? Hubungi kami atau ikuti media sosial untuk update terbaru.</p>
+          <div class="actions">
+            <a class="btn" href="mailto:riscygrafis@gmail.com" rel="noopener">Email Kami</a>
+            <a class="btn secondary" href="https://wa.me/6281227729240" target="_blank" rel="noopener">WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="y"></span> — Sedang dalam perbaikan. Terima kasih atas pengertiannya. ©ERG
+    </footer>
+  </main>
+
+  <script>
+    // Tahun otomatis
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // (Opsional) animasi kecil pada progress width untuk first paint
+    const bar = document.querySelector('.progress');
+    requestAnimationFrame(() => {
+      bar.style.width = '65%';
+    });
+  </script>
+</body>
+</html>
