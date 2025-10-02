@@ -5,20 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portofolio Multimedia - Elfan Rizqi Awaludin</title>
   <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="icon" type="image/png" href="images/logo.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="images/logo.png">
-<link rel="icon" type="image/png" sizes="16x16" href="images/logo.png">
-<link rel="apple-touch-icon" href="images/logo.png">
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/favicon.png" />
+
+  <style>
+    /* Supaya pas klik menu, section tidak ketutup navbar */
+    section { scroll-margin-top: 80px; }
+  </style>
 </head>
 <body class="bg-gray-950 text-white font-sans">
 
   <!-- Navbar -->
   <header class="fixed w-full bg-gray-900/70 backdrop-blur-lg z-50">
     <nav class="container max-w-screen-xl mx-auto flex justify-between items-center py-4 px-8">
+      <!-- Logo -->
       <a href="#home">
         <img src="images/logo.png" alt="Logo" class="h-10 w-auto" />
       </a>
+
+      <!-- Menu Desktop -->
       <ul class="hidden md:flex space-x-6 text-sm font-medium">
         <li><a href="#home" class="hover:text-emerald-400 transition">Home</a></li>
         <li><a href="#portfolio" class="hover:text-emerald-400 transition">Portofolio</a></li>
@@ -32,8 +38,14 @@
         <li><a href="#video" class="hover:text-emerald-400 transition">Video</a></li>
         <li><a href="#contact" class="hover:text-emerald-400 transition">Kontak</a></li>
       </ul>
-      <button id="menu-btn" class="md:hidden px-3 py-2 border border-emerald-400 text-emerald-400 rounded-lg">☰</button>
+
+      <!-- Tombol Mobile -->
+      <button id="menu-btn" class="md:hidden px-3 py-2 border border-emerald-400 text-emerald-400 rounded-lg">
+        ☰
+      </button>
     </nav>
+
+    <!-- Menu Mobile -->
     <div id="menu-mobile" class="hidden md:hidden bg-gray-900/95 px-8 pb-4">
       <ul class="flex flex-col space-y-4 text-sm font-medium">
         <li><a href="#home">Home</a></li>
@@ -52,18 +64,27 @@
   </header>
 
   <!-- Container untuk load section -->
-  <main id="content"></main>
+  <main id="content" class="pt-20"></main>
 
   <!-- Footer -->
   <footer class="bg-gray-950 py-6 text-center text-gray-500 text-sm border-t border-gray-800">
     © 2025 ERG x Elfan Riscy. All Rights Reserved
   </footer>
 
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/6281227729240" target="_blank" 
+     class="fixed bottom-6 right-6 bg-emerald-500 text-white rounded-full shadow-lg p-4 hover:p-5 transition-all duration-300 z-50">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M20.52 3.48A11.93 11.93 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 5.99L0 24l6.21-1.62A11.93 11.93 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.19-1.24-6.19-3.48-8.52zM12 22a9.94 9.94 0 0 1-5.1-1.4l-.36-.21-3.68.96.98-3.58-.23-.37A9.96 9.96 0 0 1 2 12c0-5.52 4.48-10 10-10 2.67 0 5.18 1.04 7.07 2.93A9.96 9.96 0 0 1 22 12c0 5.52-4.48 10-10 10zm5.24-7.76c-.29-.15-1.72-.85-1.98-.94-.27-.1-.46-.15-.65.15s-.75.94-.92 1.13c-.17.19-.34.21-.63.06-.29-.15-1.23-.45-2.34-1.43-.86-.76-1.44-1.7-1.61-1.99-.17-.29-.02-.45.13-.6.13-.13.29-.34.44-.51.15-.17.19-.29.29-.48.1-.19.05-.36-.02-.51-.07-.15-.65-1.57-.89-2.15-.24-.58-.48-.5-.65-.51h-.56c-.19 0-.51.07-.77.36s-1.01.99-1.01 2.41 1.04 2.79 1.19 2.98c.15.19 2.05 3.13 4.96 4.39.69.3 1.23.48 1.65.62.69.22 1.31.19 1.8.11.55-.08 1.72-.7 1.97-1.38.24-.67.24-1.25.17-1.38-.07-.13-.26-.21-.55-.36z"/>
+    </svg>
+  </a>
+
   <script>
     const sections = [
       "hero1","clients","hero","portfolio","skills","services","timeline",
       "pendidikan","news","training","employment","video","contact"
     ];
+
     async function loadSections() {
       const container = document.getElementById("content");
       for (let s of sections) {
@@ -72,14 +93,21 @@
         container.innerHTML += html;
       }
     }
-    
     loadSections();
 
     // Menu mobile
     const menuBtn = document.getElementById("menu-btn");
     const menuMobile = document.getElementById("menu-mobile");
+
     menuBtn.addEventListener("click", () => {
       menuMobile.classList.toggle("hidden");
+    });
+
+    // Tutup menu mobile setelah klik link
+    document.addEventListener("click", (e) => {
+      if (e.target.closest("#menu-mobile a")) {
+        menuMobile.classList.add("hidden");
+      }
     });
   </script>
   
