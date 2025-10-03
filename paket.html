@@ -424,11 +424,48 @@
   <section id="contact" class="py-20 container max-w-screen-md mx-auto px-6">
     <h2 class="text-3xl font-bold mb-8 text-emerald-400 text-center">Kontak Kami</h2>
     <form action="https://api.web3forms.com/submit" method="POST" class="grid gap-4 bg-gray-800 p-8 rounded-xl shadow">
-      <input type="text" placeholder="Nama" class="p-3 rounded bg-gray-700 border border-gray-600">
-      <input type="email" placeholder="Email" class="p-3 rounded bg-gray-700 border border-gray-600">
-      <textarea placeholder="Pesan" rows="4" class="p-3 rounded bg-gray-700 border border-gray-600"></textarea>
-      <button class="px-6 py-3 bg-emerald-500 text-black font-semibold rounded hover:bg-emerald-400">Kirim Pesan</button>
-    </form>
+  <!-- Access key Web3Forms -->
+  <input type="hidden" name="access_key" value="e8357906-6e1d-4ce8-b267-fa4232689cb3">
+
+  <!-- Input Nama -->
+  <input 
+    type="text" 
+    name="name" 
+    id="name" 
+    placeholder="Nama" 
+    required
+    class="p-3 rounded bg-gray-700 border border-gray-600 focus:ring-2 focus:ring-emerald-400"
+  >
+
+  <!-- Input Email -->
+  <input 
+    type="email" 
+    name="email" 
+    id="email" 
+    placeholder="Email" 
+    required
+    class="p-3 rounded bg-gray-700 border border-gray-600 focus:ring-2 focus:ring-emerald-400"
+  >
+
+  <!-- Textarea Pesan -->
+  <textarea 
+    name="body" 
+    id="body" 
+    placeholder="Pesan" 
+    rows="4" 
+    required
+    class="p-3 rounded bg-gray-700 border border-gray-600 focus:ring-2 focus:ring-emerald-400"
+  ></textarea>
+
+  <!-- Tombol Submit -->
+  <button 
+    type="submit" 
+    class="px-6 py-3 bg-emerald-500 text-black font-semibold rounded hover:bg-emerald-400 transition"
+  >
+    Kirim Pesan
+  </button>
+</form>
+
     <div class="mt-6 text-center text-gray-400">
       <p>Email: <a href="mailto:riscygrafis@gmail.com" class="text-emerald-400">riscygrafis@gmail.com</a></p>
       <p>WhatsApp: <a href="https://wa.me/6281227729240" target="_blank" class="text-emerald-400">+62 812-2772-9240</a></p>
@@ -460,6 +497,7 @@
 
 </body>
 </html>
+
 
 
 
