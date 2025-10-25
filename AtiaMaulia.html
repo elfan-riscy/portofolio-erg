@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Atia Maulia</title>
+<meta name="description" content="Kartu ulang tahun bergaya Spotify — pilih lagu, putar, buka kado, tulis doa, terkirim via Web3Forms.">
+<style>
+  :root{
+    --bg:#0b0b0c; --panel:#121212; --muted:#b3b3b3; --accent:#1DB954; --text:#eee;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#050607,#0b0b0c);color:var(--text);-webkit-font-smoothing:antialiased}
+  .container{width:94%;max-width:980px;margin:28px auto;display:grid;grid-template-columns:1fr 360px;gap:18px}
+  @media (max-width:880px){.container{grid-template-columns:1fr;padding:12px;}.right{order:2}}
+
+  /* intro full-screen For You */
+  .fullscreen{position:fixed;inset:0;display:grid;place-items:center;background:linear-gradient(135deg,#071018,#102428);z-index:80}
+  .for-you{background:linear-gradient(180deg,#0f1720,#0b1114);padding:28px;border-radius:16px;text-align:center;box-shadow:0 24px 80px rgba(2,6,23,0.7)}
+  .for-you h1{margin:0 0 8px;font-size:22px}
+  .for-you p{margin:0 0 16px;color:var(--muted)}
+  .btn-foryou{background:var(--accent);color:#07220b;border:none;padding:14px 22px;border-radius:999px;font-weight:800;cursor:pointer;box-shadow:0 12px 36px rgba(29,185,84,0.12)}
+
+  /* left column */
+  .left{display:flex;flex-direction:column;gap:12px}
+  .picker{display:flex;gap:12px;align-items:stretch}
+  .track{flex:1;background:#0e1112;padding:12px;border-radius:12px;cursor:pointer;border:1px solid rgba(255,255,255,0.03);display:flex;flex-direction:column;gap:8px;align-items:center;transition:transform .16s,box-shadow .16s}
+  .track:hover{transform:translateY(-6px);box-shadow:0 14px 40px rgba(2,6,23,0.5)}
+  .cover{width:100%;aspect-ratio:1/1;border-radius:8px;background-size:cover;background-position:center}
+  .t-title{font-weight:700;text-align:center}
+  .t-artist{font-size:13px;color:var(--muted);text-align:center}
+
+  .player{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,0.03);display:flex;gap:12px;align-items:flex-start}
+  .now{display:flex;gap:12px;align-items:center;width:100%}
+  .now-cover{width:92px;height:92px;border-radius:10px;background-size:cover;background-position:center;flex-shrink:0}
+  .meta{flex:1;display:flex;flex-direction:column;gap:6px}
+  .meta .title{font-weight:800;font-size:16px}
+  .meta .artist{color:var(--muted)}
+
+  .controls{display:flex;gap:12px;align-items:center}
+  .play-btn{width:56px;height:56px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:#07220b;font-weight:800;border:none;cursor:pointer;box-shadow:0 10px 30px rgba(29,185,84,0.14)}
+  .progress-wrap{width:100%}
+  .progress{height:6px;background:#161616;border-radius:8px;overflow:hidden}
+  .bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),#7af0a8);transition:width .08s linear}
+  .time{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin-top:6px}
+
+  /* waveform and needle */
+  .visuals{display:flex;gap:12px;align-items:center;margin-top:6px}
+  #wave{flex:1;height:56px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border-radius:8px;padding:8px;display:flex;align-items:flex-end}
+  .needle{width:36px;height:60px;border-radius:6px;background:#0b0b0b;border:1px solid rgba(255,255,255,0.03);display:grid;place-items:center;font-weight:800;transform-origin:50% 90%;transition:transform .12s linear}
+
+  /* gift */
+  .gift-wrap{display:grid;place-items:center;margin-top:12px}
+  .gift{width:150px;height:150px;border-radius:12px;background:linear-gradient(180deg,#ff8aa1,#ff5ea0);display:grid;place-items:center;position:relative;cursor:pointer;box-shadow:0 18px 60px rgba(255,94,160,0.12);transition:transform .35s}
+  .gift:hover{transform:translateY(-6px)}
+  .gift.open{animation:openGift .7s forwards}
+  @keyframes openGift{0%{transform:scale(1)}30%{transform:scale(1.06) rotate(-4deg)}100%{transform:scale(0.95) rotate(-6deg) translateY(-40px);opacity:0}}
+
+  /* right column */
+  .right{display:flex;flex-direction:column;gap:12px}
+  .card-quote{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.03);min-height:260px;display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center;text-align:center}
+  .quote-text{font-size:18px;line-height:1.45;opacity:0;transform:translateY(10px);transition:all .35s}
+  .quote-text.show{opacity:1;transform:translateY(0)}
+  .sender-wrap{display:flex;flex-direction:column;gap:8px;align-items:center}
+
+  /* form area */
+  form { width:100%; display:flex; flex-direction:column; gap:8px; align-items:center; }
+  input[type="text"], input[type="email"], textarea { width:100%; max-width:320px; padding:10px; border-radius:8px; border:1px solid rgba(255,255,255,0.06); background:#0b0b0b; color:var(--text); }
+  textarea { min-height:100px; resize:vertical; }
+  .btn-send { background:var(--accent); color:#07220b; padding:10px 14px; border:none; border-radius:8px; cursor:pointer; font-weight:800; }
+
+  /* confetti */
+  #confetti{position:fixed;inset:0;pointer-events:none;z-index:50}
+  .note{font-size:12px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<!-- For You intro -->
+<div id="intro" class="fullscreen" aria-hidden="false">
+  <div class="for-you" role="dialog" aria-label="For You">
+    <h1>For You 💌</h1>
+    <p>Sentuhan personal — pilih lagu, putar, buka kado, tulis doa, terkirim otomatis.</p>
+    <button id="enterBtn" class="btn-foryou" aria-label="Open For You">For You</button>
+  </div>
+</div>
+
+<div class="container" role="main" aria-live="polite">
+  <!-- LEFT -->
+  <div class="left">
+    <div class="picker" id="picker" aria-hidden="false" aria-label="Pilih lagu">
+      <!-- tracks injected -->
+    </div>
+
+    <div class="player" id="player" style="display:none" aria-hidden="true">
+      <div class="now">
+        <div class="now-cover" id="nowCover" style="background:#222"></div>
+        <div class="meta">
+          <div class="title" id="nowTitle">Pilih lagu dulu</div>
+          <div class="artist" id="nowArtist">Nadhif Basalamah</div>
+
+          <div class="controls" aria-label="Kontrol pemutar">
+            <button id="playBtn" class="play-btn" aria-label="Play/Pause">▶</button>
+            <div style="flex:1">
+              <div class="progress-wrap">
+                <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100"><div class="bar" id="bar"></div></div>
+                <div class="time"><small id="curTime">0:00</small><small id="durTime">0:00</small></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="visuals" aria-hidden="true">
+            <div id="wave"></div>
+            <div class="needle" id="needle">♪</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gift-wrap" aria-hidden="true">
+        <div class="gift" id="gift" title="Klik untuk buka kado" aria-label="Gift box">
+          <div style="font-size:36px">🎁</div>
+        </div>
+        <div class="note">Klik kado setelah musik diputar untuk membuka</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="right">
+    <div class="card-quote" aria-live="polite">
+      <div id="quoteText" class="quote-text">Kado dan kata-kata akan muncul setelah lagu dipilih dan kado dibuka.</div>
+      <div id="senderDisplay" style="margin-top:10px;font-weight:800;display:none">To: Atia Maulia</div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div class="note">tekan kata-kata nya ya</div>
+      <div class="note">ERG</div>
+    </div>
+
+    <!-- form: user can write doa/ucapan; this will be sent to Web3Forms -->
+    <div class="sender-wrap" id="messageArea" style="display:none">
+      <form id="wishForm" action="https://api.web3forms.com/submit" method="POST">
+        <!-- required access key (provided) -->
+        <input type="hidden" name="access_key" value="e8357906-6e1d-4ce8-b267-fa4232689cb3">
+        <!-- we will fill sender name automatically (hidden) -->
+        <input type="hidden" name="name" id="formName" value="Riscy Grafis">
+        <!-- optional: include a reply-to field so you can get email from visitor if needed -->
+        <input type="email" name="email" id="formEmail" placeholder="Email (opsional, jika ingin balasan)" />
+        <textarea name="message" id="formMessage" placeholder="Tulis doa atau ucapanmu di sini..."></textarea>
+        <!-- optionally pass a subject -->
+        <input type="hidden" name="subject" value="Kado Ulang Tahun — Dari Website">
+        <!-- honeypot / redirect fields recommended by web3forms (optional) -->
+        <input type="hidden" name="redirect" value="">
+        <button type="submit" class="btn-send">Kirim & Tampilkan</button>
+      </form>
+      <div id="formStatus" style="margin-top:8px;color:var(--muted);font-size:13px"></div>
+    </div>
+
+  </div>
+</div>
+
+<canvas id="confetti"></canvas>
+
+<!-- Audio element (local files) -->
+<audio id="audio" preload="metadata"></audio>
+
+<script>
+
+const SENDER_NAME = "Atia Maulia"; // auto-filled sender name (you asked this)
+const tracks = [
+  { id:'t1', title:'Happy birthday', artist:'Bulan Sutena', file:'music/Happy_birthday.mp3', cover:'img/img1.jpg' },
+  { id:'t2', title:'Penjaga Hati', artist:'Nadhif Basalamah', file:'music/penjaga_hati.mp3', cover:'img/img2.jpg' },
+  { id:'t3', title:'Bergema Sampai Selamanya', artist:'Nadhif Basalamah', file:'music/bergema_sampai_selamanya.mp3', cover:'img/hbd.jpg' }
+];
+
+const quotes = [
+  "29 Oktober 2025, tahu hari apa???",
+  "yups betul hari sumpah pemuda",
+  "Eh kemarin itu, berarti sekarang hari sumpah pemudi hhe",
+  "Selamat ulang tahun! ya Atia Maulia 🎉",
+  "Semoga setiap langkahmu diliputi kebahagiaan dan berkah ✨",
+  "Kamu layak mendapatkan hari yang paling indah — karena kamu istimewa",
+  "Terima kasih telah memberi warna — teruslah bersinar 🌟",
+  "Tiup lilinmu dan buat satu harapan spesial — aku mendoakanmu 🎂"
+];
+
+/* ===== DOM refs ===== */
+const intro = document.getElementById('intro');
+const enterBtn = document.getElementById('enterBtn');
+const picker = document.getElementById('picker');
+const player = document.getElementById('player');
+const nowCover = document.getElementById('nowCover');
+const nowTitle = document.getElementById('nowTitle');
+const nowArtist = document.getElementById('nowArtist');
+const playBtn = document.getElementById('playBtn');
+const audio = document.getElementById('audio');
+const bar = document.getElementById('bar');
+const curTime = document.getElementById('curTime');
+const durTime = document.getElementById('durTime');
+const wave = document.getElementById('wave');
+const needle = document.getElementById('needle');
+const gift = document.getElementById('gift');
+const quoteText = document.getElementById('quoteText');
+const senderDisplay = document.getElementById('senderDisplay');
+const messageArea = document.getElementById('messageArea');
+const formName = document.getElementById('formName');
+const wishForm = document.getElementById('wishForm');
+const formStatus = document.getElementById('formStatus');
+
+/* internal state */
+let chosen = null, qIndex = -1, musicStarted = false, audioCtx, analyser, sourceNode, dataArray, bufferLength;
+
+/* Populate picker UI with thumbnails (custom cover or gradient) */
+function createPicker(){
+  picker.innerHTML = '';
+  tracks.forEach((t, i)=>{
+    const el = document.createElement('div');
+    el.className = 'track';
+    const coverUrl = t.cover;
+    // if cover exists (file present) use it; else use gradient background
+    const coverStyle = `background:${coverUrl? `url('${coverUrl}') center/cover` : ['linear-gradient(180deg,#ff9a9e,#ff6f91)','linear-gradient(180deg,#ffd166,#ff6b6b)','linear-gradient(180deg,#9be15d,#00e3ae)'][i%3] }`;
+    el.innerHTML = `<div class="cover" style="${coverStyle}"></div>
+                    <div class="t-title">${t.title}</div>
+                    <div class="t-artist">${t.artist}</div>`;
+    el.addEventListener('click', ()=> selectTrack(i));
+    picker.appendChild(el);
+  });
+}
+createPicker();
+
+/* Enter -> hide intro */
+enterBtn.addEventListener('click', ()=> {
+  intro.style.display = 'none';
+});
+
+/* Select track: set audio src and UI */
+function selectTrack(i){
+  chosen = tracks[i];
+  nowTitle.textContent = chosen.title;
+  nowArtist.textContent = chosen.artist;
+  // set cover (fallback gradient if image missing)
+  nowCover.style.background = `url('${chosen.cover}') center/cover`;
+  // set audio src
+  audio.src = chosen.file;
+  audio.load();
+  player.style.display = 'flex';
+  player.setAttribute('aria-hidden','false');
+  qIndex = -1;
+  quoteText.textContent = 'Klik Play lalu buka kado untuk isi kado ❤️';
+  // set sender name hidden input
+  formName.value = SENDER_NAME;
+}
+
+/* Play/Pause button behavior */
+playBtn.addEventListener('click', ()=>{
+  if(!chosen){ alert('Pilih lagu dulu di kiri ya 🙂'); return; }
+  // user gesture required to start audio context in some browsers
+  if(audio.paused){
+    audio.play().catch(e=>{
+      console.warn('Play blocked', e);
+      alert('Browser memblokir autoplay. Klik tombol play sekali lagi.');
+    });
+  } else {
+    audio.pause();
+  }
+});
+
+/* Audio events (update UI) */
+audio.addEventListener('play', ()=>{
+  initAudioVisual(); // init analyser & waveform once user interacts
+  musicStarted = true;
+  playBtn.textContent = '❚❚';
+});
+audio.addEventListener('pause', ()=> playBtn.textContent = '▶');
+audio.addEventListener('loadedmetadata', ()=> durTime.textContent = formatTime(audio.duration));
+audio.addEventListener('timeupdate', ()=>{
+  const pct = (audio.currentTime / Math.max(0.001, audio.duration)) * 100;
+  bar.style.width = pct + '%';
+  curTime.textContent = formatTime(audio.currentTime);
+  // needle realistic rotation: -30..+30 based on progress with slight randomized swing using Math.sin
+  const t = audio.currentTime || 0;
+  const swing = Math.sin(t * 8) * 2; // small beat swing
+  const angle = -30 + pct * 0.6 + swing;
+  needle.style.transform = `rotate(${angle}deg)`;
+});
+
+/* Format time to m:ss */
+function formatTime(t){ if(!t || isNaN(t)) return '0:00'; const m = Math.floor(t/60); const s = Math.floor(t%60).toString().padStart(2,'0'); return `${m}:${s}`; }
+
+/* Gift click */
+gift.addEventListener('click', ()=>{
+  if(!musicStarted){
+    // pulse hint
+    gift.animate([{transform:'translateY(0)'},{transform:'translateY(-8px)'},{transform:'translateY(0)'}],{duration:450});
+    return alert('Silakan tekan Play dulu supaya musiknya jalan 🎧');
+  }
+  // visual open
+  gift.classList.add('open');
+  launchConfetti(false);
+  setTimeout(()=>{
+    gift.style.display = 'none';
+    // show first quote
+    showNextQuote(true);
+    // show sender display and message form
+    senderDisplay.style.display = 'block';
+    messageArea.style.display = 'flex';
+    senderDisplay.textContent = `To: ${SENDER_NAME}`;
+  }, 650);
+});
+
+/* Show quotes: click on right panel to advance */
+document.querySelector('.right').addEventListener('click', ()=>{
+  if(gift.style.display !== 'none') return; // blocked until gift opened
+  showNextQuote();
+});
+
+function showNextQuote(first=false){
+  if(first) qIndex = -1;
+  qIndex++;
+  if(qIndex >= quotes.length){
+    quoteText.classList.remove('show');
+    setTimeout(()=>{ quoteText.textContent = "🎈 Tamat — semoga apa yang kamu cita citakan tercapai, semangat terus ya! from Founder ERG"; quoteText.classList.add('show'); launchConfetti(true); }, 160);
+    return;
+  }
+  quoteText.classList.remove('show');
+  setTimeout(()=>{
+    quoteText.textContent = quotes[qIndex];
+    quoteText.classList.add('show');
+    launchConfetti(false);
+  }, 180);
+}
+
+/* ================= Waveform via WebAudio Analyser ================= */
+const AudioCtx = window.AudioContext || window.webkitAudioContext;
+let canvasWave, wCtx;
+function initAudioVisual(){
+  if(audioCtx) return;
+  try {
+    audioCtx = new AudioCtx();
+    sourceNode = audioCtx.createMediaElementSource(audio);
+    analyser = audioCtx.createAnalyser();
+    analyser.fftSize = 256;
+    bufferLength = analyser.frequencyBinCount;
+    dataArray = new Uint8Array(bufferLength);
+    sourceNode.connect(analyser);
+    analyser.connect(audioCtx.destination);
+  } catch(e){
+    console.warn('AudioContext init failed:', e);
+  }
+
+  // create canvas inside #wave
+  canvasWave = document.createElement('canvas');
+  canvasWave.width = wave.clientWidth;
+  canvasWave.height = wave.clientHeight;
+  wave.appendChild(canvasWave);
+  wCtx = canvasWave.getContext('2d');
+  window.addEventListener('resize', ()=> { if(canvasWave){ canvasWave.width = wave.clientWidth; canvasWave.height = wave.clientHeight; }});
+  drawWave();
+}
+
+function drawWave(){
+  requestAnimationFrame(drawWave);
+  if(!wCtx) return;
+  wCtx.clearRect(0,0,canvasWave.width,canvasWave.height);
+  if(!analyser){
+    // idle bars
+    const bars = 28; const bw = canvasWave.width / bars;
+    for(let i=0;i<bars;i++){
+      const h = 6 + Math.abs(Math.sin((Date.now()/600)+(i))) * (canvasWave.height*0.5);
+      wCtx.fillStyle = `rgba(255,255,255,0.06)`;
+      wCtx.fillRect(i*bw, canvasWave.height - h, bw*0.7, h);
+    }
+    return;
+  }
+  analyser.getByteFrequencyData(dataArray);
+  const bars = 32;
+  const step = Math.floor(bufferLength / bars);
+  const bw = canvasWave.width / bars;
+  for(let i=0;i<bars;i++){
+    let sum=0;
+    for(let j=0;j<step;j++) sum += dataArray[(i*step)+j];
+    const avg = sum / step;
+    const h = (avg/255) * canvasWave.height * 0.95;
+    const grad = wCtx.createLinearGradient(0,0,0,canvasWave.height);
+    grad.addColorStop(0, 'rgba(29,185,84,0.95)');
+    grad.addColorStop(1, 'rgba(255,255,255,0.06)');
+    wCtx.fillStyle = grad;
+    wCtx.fillRect(i*bw + (bw*0.12), canvasWave.height - h, bw*0.7, h);
+  }
+}
+
+/* ================= Simple confetti ================= */
+const confettiCanvas = document.getElementById('confetti');
+const cctx = confettiCanvas.getContext('2d');
+function resizeConf(){ confettiCanvas.width = innerWidth; confettiCanvas.height = innerHeight; }
+window.addEventListener('resize', resizeConf); resizeConf();
+let parts = [];
+function randColor(){ const c=['#ff6bcb','#fddb92','#8ef6e4','#c77dff','#ffd166']; return c[Math.floor(Math.random()*c.length)]; }
+function launchConfetti(finale){
+  const count = finale? 250 : 60;
+  for(let i=0;i<count;i++){
+    parts.push({
+      x: innerWidth/2 + (Math.random()-0.5)*300,
+      y: innerHeight/2 + (Math.random()-0.5)*120,
+      vx: (Math.random()-0.5)*8,
+      vy: -Math.random()*10 - (finale?6:0),
+      g: 0.34 + Math.random()*0.3,
+      size: 6 + Math.random()*6,
+      color: randColor(), life:0, drag:0.99
+    });
+  }
+}
+function updateConf(){
+  cctx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
+  for(let i=0;i<parts.length;i++){
+    const p = parts[i];
+    p.vx *= p.drag; p.vy += p.g; p.x += p.vx; p.y += p.vy; p.life++;
+    cctx.fillStyle = p.color;
+    cctx.fillRect(p.x, p.y, p.size, p.size*1.2);
+  }
+  parts = parts.filter(p => p.y < confettiCanvas.height + 80 && p.x > -80 && p.x < confettiCanvas.width + 80);
+  requestAnimationFrame(updateConf);
+}
+updateConf();
+
+/* small floating gift hint */
+setInterval(()=> {
+  const g = document.getElementById('gift');
+  if(g && g.style.display !== 'none') g.animate([{transform:'translateY(0)'},{transform:'translateY(-6px)'},{transform:'translateY(0)'}],{duration:2600});
+}, 3200);
+
+/* ======= Web3Forms submission handling (AJAX) ======== */
+wishForm.addEventListener('submit', (e)=>{
+  e.preventDefault();
+  const formData = new FormData(wishForm);
+  // disable button to prevent double submit
+  wishForm.querySelector('button[type="submit"]').disabled = true;
+  formStatus.textContent = 'Mengirim...';
+
+  fetch(wishForm.action, {
+    method: 'POST',
+    body: formData,
+    headers: { 'Accept': 'application/json' }
+  }).then(r => r.json())
+    .then(j => {
+      if(j.success){
+        formStatus.textContent = 'Terkirim — ucapanmu sudah dikirim! 🎉';
+        // display the message immediately on the right panel
+        const msg = formData.get('message');
+        if(msg){
+          const el = document.createElement('div');
+          el.style.marginTop = '8px';
+          el.style.whiteSpace = 'pre-wrap';
+          el.textContent = `Ucapan: ${msg}`;
+          document.querySelector('.card-quote').appendChild(el);
+        }
+        // optionally show sender name (already shown)
+      } else {
+        formStatus.textContent = 'Gagal mengirim — coba lagi nanti.';
+        wishForm.querySelector('button[type="submit"]').disabled = false;
+      }
+    }).catch(err=>{
+      console.error(err);
+      formStatus.textContent = 'Terjadi kesalahan saat mengirim. Coba lagi.';
+      wishForm.querySelector('button[type="submit"]').disabled = false;
+    });
+});
+
+/* initial message text */
+quoteText.textContent = "Tekan 'For You' lalu pilih lagu. Setelah pilih, tekan Play dan buka kadonya ✨";
+
+/* accessibility: allow keyboard Enter to open For You */
+enterBtn.addEventListener('keydown', (e)=> { if(e.key === 'Enter') enterBtn.click(); });
+
+</script>
+</body>
+</html>
