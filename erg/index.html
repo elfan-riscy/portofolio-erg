@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ERG - Dashboard Profesional</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body class="bg-light">
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background:#000000;">
+    <div class="container-fluid">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="logo.png" alt="ERG" id="logo" style="height:34px; margin-right:10px;" onerror="this.style.display='none'">
+        <span>ERG Multimedia Creative</span>
+      </a>
+
+      <div class="d-flex align-items-center ms-auto">
+        <div class="text-white me-3" id="adminEmail"></div>
+        <button class="btn btn-outline-light btn-sm" id="btnLogout">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container my-4">
+
+    <!-- LOGIN CARD (tertutup saat sudah login) -->
+    <div id="loginBox" class="card mx-auto" style="max-width:420px">
+      <div class="card-body">
+        <h5 class="card-title">Login Admin - ERG</h5>
+        <div class="mb-2">
+          <input id="email" class="form-control" type="email" placeholder="Email admin" />
+        </div>
+        <div class="mb-2">
+          <input id="password" class="form-control" type="password" placeholder="Password" />
+        </div>
+        <div class="d-grid">
+          <button id="btnLogin" class="btn btn-primary">Masuk</button>
+        </div>
+        <p class="text-muted mt-2 small">Gunakan akun admin Firebase (Email/Password).</p>
+      </div>
+    </div>
+
+    <!-- APP -->
+    <div id="app" class="d-none">
+
+      <!-- STAT CARDS -->
+      <div class="row g-3 mb-3">
+        <div class="col-md-4">
+          <div class="card stat-card">
+            <div class="card-body">
+              <h6>Total Job</h6>
+              <h3 id="totalJobs">0</h3>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card stat-card">
+            <div class="card-body">
+              <h6>Job Selesai</h6>
+              <h3 id="doneJobs">0</h3>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card stat-card">
+            <div class="card-body">
+              <h6>Total Pemasukan</h6>
+              <h3 id="totalIncome">Rp 0</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAIN GRID -->
+      <div class="row g-4">
+
+        <!-- Left: Form tambah job & transaksi -->
+        <div class="col-lg-4">
+          <div class="card mb-3">
+            <div class="card-header">Tambah Job</div>
+            <div class="card-body">
+              <form id="jobForm" autocomplete="off">
+                <div class="mb-2">
+                  <input id="projectName" class="form-control" placeholder="Nama project" required>
+                </div>
+                <div class="mb-2">
+                  <input id="clientName" class="form-control" placeholder="Nama klien" required>
+                </div>
+                <div class="mb-2">
+                  <select id="category" class="form-select">
+                    <option>Desain Grafis</option>
+                    <option>Fotografi</option>
+                    <option>Videografi</option>
+                    <option>Editing</option>
+                    <option>Paket data</option>
+                    <option>Website</option>
+                  </select>
+                </div>
+                <div class="mb-2">
+                  <input id="price" class="form-control" type="number" placeholder="Harga (Rp)" required>
+                </div>
+                <div class="mb-2">
+                  <textarea id="notes" class="form-control" placeholder="Catatan (opsional)"></textarea>
+                </div>
+                <div class="d-grid">
+                  <button class="btn btn-primary" type="submit">Tambah Job</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">Tambah Transaksi</div>
+            <div class="card-body">
+              <form id="trxForm" autocomplete="off">
+                <div class="mb-2">
+                  <select id="trxJobSelect" class="form-select">
+                    <option value="">Pilih Job (opsional)</option>
+                  </select>
+                </div>
+                <div class="mb-2">
+                  <input id="trxAmount" class="form-control" type="number" placeholder="Nominal (Rp)" required>
+                </div>
+                <div class="mb-2">
+                  <select id="trxStatus" class="form-select">
+                    <option value="pending">Pending</option>
+                    <option value="lunas">Lunas</option>
+                  </select>
+                </div>
+                <div class="d-grid">
+                  <button class="btn btn-success" type="submit">Tambah Transaksi</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Middle: Tabel job -->
+        <div class="col-lg-5">
+          <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center gap-2">
+                <span>Daftar Job</span>
+                <button id="exportJobs" class="btn btn-sm btn-outline-primary">Export Job</button>
+                <button id="exportTrx" class="btn btn-sm btn-outline-success">Export Transaksi</button>
+            </div>
+            <div>
+                <select id="filterStatus" class="form-select form-select-sm">
+                <option value="all">Semua Status</option>
+                <option value="masuk">Masuk</option>
+                <option value="proses">Proses</option>
+                <option value="selesai">Selesai</option>
+                </select>
+            </div>
+            </div>
+
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                  <thead class="table-light">
+                    <tr>
+                      <th>Project</th>
+                      <th>Klien</th>
+                      <th>Kategori</th>
+                      <th>Harga</th>
+                      <th>Status</th>
+                      <th>Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody id="jobTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Chart -->
+        <div class="col-lg-3">
+          <div class="card">
+            <div class="card-header">Grafik Pendapatan (per Bulan)</div>
+            <div class="card-body">
+              <canvas id="incomeChart" width="300" height="300"></canvas>
+            </div>
+          </div>
+
+          <div class="card mt-3">
+            <div class="card-header">Transaksi Terakhir</div>
+            <div class="card-body p-2">
+              <div id="trxList" class="small"></div>
+            </div>
+          </div>
+        </div>
+
+      </div> <!-- row -->
+
+    </div> <!-- app -->
+
+  </div> <!-- container -->
+
+  <!-- Firebase auth loader + dynamic dashboard import -->
+  <script type="module">
+    import { auth } from "./firebase-config.js";
+    import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+    const loginBox = document.getElementById('loginBox');
+    const appBox = document.getElementById('app');
+    const btnLogin = document.getElementById('btnLogin');
+    const btnLogout = document.getElementById('btnLogout');
+    const adminEmail = document.getElementById('adminEmail');
+
+    btnLogin.addEventListener('click', async () => {
+      const email = document.getElementById('email').value.trim();
+      const pw = document.getElementById('password').value;
+      try {
+        await signInWithEmailAndPassword(auth, email, pw);
+      } catch (e) {
+        alert('Login gagal: ' + e.message);
+      }
+    });
+
+    btnLogout.addEventListener('click', ()=> signOut(auth));
+
+    onAuthStateChanged(auth, user => {
+      if (user) {
+        loginBox.classList.add('d-none');
+        appBox.classList.remove('d-none');
+        adminEmail.textContent = user.email;
+        // load dashboard logic (module)
+        import('./dashboard.js');
+      } else {
+        loginBox.classList.remove('d-none');
+        appBox.classList.add('d-none');
+      }
+    });
+  </script>
+
+  <!-- Bootstrap JS (optional for components) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

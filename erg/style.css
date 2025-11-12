@@ -1,0 +1,15 @@
+:root{
+  --brand:#0b69ff;
+  --muted:#6b7280;
+  --card:#ffffff;
+  font-family: Inter, system-ui, Arial, sans-serif;
+}
+body{font-family:Inter,system-ui,Arial,sans-serif}
+.navbar-brand img{border-radius:6px}
+.stat-card{background:linear-gradient(180deg,#ffffff, #f8fbff); border-left:6px solid var(--brand)}
+.job-row, .trx-row {display:flex;justify-content:space-between;align-items:center;padding:12px;border-bottom:1px solid #f1f5f9}
+.job-row .actions select{margin-right:8px}
+.card{border-radius:10px}
+#logo{object-fit:contain}
+.table td, .table th{vertical-align:middle}
+.small .row {padding:6px}
