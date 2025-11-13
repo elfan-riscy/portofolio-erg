@@ -219,9 +219,12 @@ export function initDashboard() {
     const notaNumber = await getNextNotaNumber();
     const notaCode = `ERG/INV/${notaNumber.toString().padStart(4, "0")}`;
 
-    const pdf = new jsPDF("p", "mm", "a4");
-    const pageWidth = pdf.internal.pageSize.getWidth();
-
+    const pdf = new jsPDF({
+  orientation: "p",
+  unit: "mm",
+  format: "a4",
+  compress: true,
+});
     const logo = await loadImageToBase64("logo.png");
     const ttd = await loadImageToBase64("ttd_founder.png");
     const capLunas = await loadImageToBase64("lunas.png");
@@ -365,3 +368,4 @@ export function initDashboard() {
     return String(s ?? "").replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
   }
 }
+
