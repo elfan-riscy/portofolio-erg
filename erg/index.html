@@ -68,6 +68,48 @@
 
       <div class="row g-4">
 
+        <!-- TABUNGAN -->
+<div class="card mt-4 shadow-sm border-0">
+  <div class="card-body">
+    <h5 class="text-primary fw-bold mb-3">🏦 Rekap Tabungan</h5>
+
+    <div class="row g-2 mb-3">
+      <div class="col-md-3">
+        <input type="date" id="tabTanggal" class="form-control form-control-sm">
+      </div>
+      <div class="col-md-3">
+        <select id="tabJenis" class="form-select form-select-sm">
+          <option value="setoran">Setoran</option>
+          <option value="penarikan">Penarikan</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <input type="number" id="tabNominal" class="form-control form-control-sm" placeholder="Nominal (Rp)">
+      </div>
+      <div class="col-md-3">
+        <input type="text" id="tabKet" class="form-control form-control-sm" placeholder="Keterangan">
+      </div>
+    </div>
+
+    <button id="simpanTabungan" class="btn btn-sm btn-outline-primary mb-3">💾 Tambah Data</button>
+
+    <table class="table table-sm table-striped">
+      <thead>
+        <tr>
+          <th>Tanggal</th>
+          <th>Jenis</th>
+          <th>Nominal</th>
+          <th>Keterangan</th>
+        </tr>
+      </thead>
+      <tbody id="tabelTabungan"></tbody>
+    </table>
+
+    <h6 class="text-end mt-3">Saldo Akhir: <span id="saldoTabungan" class="fw-bold text-success">Rp 0</span></h6>
+  </div>
+</div>
+
+
         <!-- LEFT -->
         <div class="col-lg-4">
           <div class="card">
@@ -132,6 +174,8 @@
             <div class="card-body p-2 small" id="trxList"></div>
           </div>
         </div>
+
+        
 
       </div>
     </div>
