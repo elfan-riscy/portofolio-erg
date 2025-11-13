@@ -98,6 +98,18 @@ export function initDashboard() {
     updateTotalIncome(latestTrx); // will also update chart & rekapan UI
   });
 
+  // ==============================
+// FILTER STATUS JOB
+// ==============================
+filterStatus.addEventListener("change", () => {
+  const filter = filterStatus.value;
+  const filtered = filter === "all"
+    ? latestJobsCache
+    : latestJobsCache.filter((j) => j.status === filter);
+  renderJobsTable(filtered);
+});
+
+
   // -------------------------
   // 3) Render jobs table
   // -------------------------
@@ -531,3 +543,4 @@ pdf.text("Jl. Raya Dieng Batur - Dieng No.05 km, Dusun Gembol 2, Gembol, Kec. Pe
   }
 
 } // end initDashboard
+
