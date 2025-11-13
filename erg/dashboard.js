@@ -82,32 +82,33 @@ export function initDashboard() {
   }
 
   // -------------------------
-  // 2) Realtime listeners - jobs & transactions
-  // -------------------------
-  const jobsQ = query(jobsRef, orderBy("created", "desc"));
-  onSnapshot(jobsQ, (snap) => {
-    latestJobs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-    renderJobs(latestJobs);
-    updateStats(latestJobs);
-  });
+// 2) Realtime listeners - jobs & transactions
+// -------------------------
+const jobsQ = query(jobsRef, orderBy("created", "desc"));
+onSnapshot(jobsQ, (snap) => {
+  latestJobs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  renderJobs(latestJobs);
+  updateStats(latestJobs);
+});
 
-  const trxQ = query(trxRef, orderBy("tanggal", "desc"));
-  onSnapshot(trxQ, (snap) => {
-    latestTrx = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-    renderTransactions(latestTrx);
-    updateTotalIncome(latestTrx); // will also update chart & rekapan UI
-  });
-
-  // ==============================
-// FILTER STATUS JOB
+// ==============================
+// FILTER STATUS JOB (Fix)
 // ==============================
 filterStatus.addEventListener("change", () => {
   const filter = filterStatus.value;
   const filtered = filter === "all"
-    ? latestJobsCache
-    : latestJobsCache.filter((j) => j.status === filter);
-  renderJobsTable(filtered);
+    ? latestJobs
+    : latestJobs.filter((j) => j.status === filter);
+  renderJobs(filtered);
 });
+
+const trxQ = query(trxRef, orderBy("tanggal", "desc"));
+onSnapshot(trxQ, (snap) => {
+  latestTrx = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  renderTransactions(latestTrx);
+  updateTotalIncome(latestTrx);
+});
+
 
 
   // -------------------------
@@ -543,4 +544,5 @@ pdf.text("Jl. Raya Dieng Batur - Dieng No.05 km, Dusun Gembol 2, Gembol, Kec. Pe
   }
 
 } // end initDashboard
+
 
