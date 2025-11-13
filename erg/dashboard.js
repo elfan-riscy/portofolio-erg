@@ -225,6 +225,8 @@ export function initDashboard() {
   format: "a4",
   compress: true,
 });
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    
     const logo = await loadImageToBase64("logo.png");
     const ttd = await loadImageToBase64("ttd_founder.png");
     const capLunas = await loadImageToBase64("lunas.png");
@@ -368,4 +370,5 @@ export function initDashboard() {
     return String(s ?? "").replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
   }
 }
+
 
